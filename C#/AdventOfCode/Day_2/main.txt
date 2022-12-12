@@ -1,0 +1,129 @@
+using AdventOfCode.Day_2;
+using System.Collections;
+
+Console.WriteLine("Hello, World!");
+
+Reader_2 reader_2 = new Reader_2();
+ArrayList moves = reader_2.GetFile();
+
+// Rock = A, Paper = B, Scissors = C
+// Rock = X, Paper = Y, Scissors = Z
+
+// Rock = 1, Paper = 2, Scissors = 3
+// Win = 6, Lose = 0, Draw = 3
+
+// Calc = Move + Score
+
+string RockCPU = "A";
+string PaperCPU = "B";
+string ScissorsCPU = "C";
+
+string RockMe = "X";
+string PaperMe = "Y";
+string ScissorMe = "Z";
+
+int score = 0;
+
+foreach (string move in moves)
+{
+    string[] playerMoves = move.Split(" ");
+    string CPU_Move = playerMoves[0];
+    string My_Move = playerMoves[1];
+
+    if (CPU_Move.Equals(RockCPU) && My_Move.Equals(RockMe))
+    {
+        score += 1 + 3;
+    } 
+    else if (CPU_Move.Equals(RockCPU) && My_Move.Equals(PaperMe))
+    {
+        score += 2 + 6;
+    } 
+    else if (CPU_Move.Equals(RockCPU) && My_Move.Equals(ScissorMe))
+    {
+        score += 3 + 0;
+    }
+    else if (CPU_Move.Equals(PaperCPU) && My_Move.Equals(RockMe))
+    {
+        score += 1 + 0;
+    }
+    else if (CPU_Move.Equals(PaperCPU) && My_Move.Equals(PaperMe))
+    {
+        score += 2 + 3;
+    }
+    else if (CPU_Move.Equals(PaperCPU) && My_Move.Equals(ScissorMe))
+    {
+        score += 3 + 6;
+    }
+    else if (CPU_Move.Equals(ScissorsCPU) && My_Move.Equals(RockMe))
+    {
+        score += 1 + 6;
+    }
+    else if (CPU_Move.Equals(ScissorsCPU) && My_Move.Equals(PaperMe))
+    {
+        score += 2 + 0;
+    }
+    else if (CPU_Move.Equals(ScissorsCPU) && My_Move.Equals(ScissorMe))
+    {
+        score += 3 + 3;
+    }
+}
+
+Console.WriteLine("The total score is: " + score);
+
+// Part two
+
+score = 0;
+
+IDictionary<string, int> moveScore = new Dictionary<string, int>();
+moveScore.Add("A", 1);
+moveScore.Add("B", 2);
+moveScore.Add("C", 3);
+
+foreach (string move in moves)
+{
+    string[] playerMoves = move.Split(" ");
+    string CPU_Move = playerMoves[0];
+    string My_Move = playerMoves[1];
+
+    // Rock X = Lose, Paper Y = Draw, Scissors Z = Win
+
+    if (CPU_Move.Equals(RockCPU) && My_Move.Equals(RockMe))
+    {
+        score += 3 + 0;
+    }
+    else if (CPU_Move.Equals(RockCPU) && My_Move.Equals(PaperMe))
+    {
+        score += 1 + 3;
+    }
+    else if (CPU_Move.Equals(RockCPU) && My_Move.Equals(ScissorMe))
+    {
+        score += 2 + 6;
+    }
+    else if (CPU_Move.Equals(PaperCPU) && My_Move.Equals(RockMe))
+    {
+        score += 1 + 0;
+    }
+    else if (CPU_Move.Equals(PaperCPU) && My_Move.Equals(PaperMe))
+    {
+        score += 2 + 3;
+    }
+    else if (CPU_Move.Equals(PaperCPU) && My_Move.Equals(ScissorMe))
+    {
+        score += 3 + 6;
+    }
+    else if (CPU_Move.Equals(ScissorsCPU) && My_Move.Equals(RockMe))
+    {
+        score += 2 + 0;
+    }
+    else if (CPU_Move.Equals(ScissorsCPU) && My_Move.Equals(PaperMe))
+    {
+        score += 3 + 3;
+    }
+    else if (CPU_Move.Equals(ScissorsCPU) && My_Move.Equals(ScissorMe))
+    {
+        score += 1 + 6;
+    }
+
+}
+
+Console.WriteLine("The total score is: " + score);

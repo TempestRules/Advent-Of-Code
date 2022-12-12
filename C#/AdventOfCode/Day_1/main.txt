@@ -1,0 +1,61 @@
+using AdventOfCode.Day_1;
+using System.Collections;
+
+Console.WriteLine("Hello, World!");
+
+Reader reader = new Reader();
+
+ArrayList elfs = reader.GetElfsFromFile();
+
+int max = 0;
+
+// Finding highest calorie count
+foreach (Elf elf in elfs)
+{
+    int calories = elf.getCaloriesCount();
+
+    if (calories > max)
+    {
+        max = calories;
+    }
+}
+
+Console.WriteLine("Highest Calories: " + max);
+
+//Part two
+int i, first, second, third;
+
+third = first = second = 000;
+
+foreach (Elf elf in elfs)
+{
+
+    int calories = elf.getCaloriesCount();
+
+
+    // If current element is
+    // greater than first
+    if (calories > first)
+    {
+        third = second;
+        second = first;
+        first = calories;
+    }
+
+    // If arr[i] is in between first
+    // and second then update second
+    else if (calories > second && calories != first)
+    {
+        third = second;
+        second = calories;
+    }
+
+    else if (calories > third && calories != second)
+        third = calories;
+}
+
+Console.WriteLine("Three largest elements are " + first + " " + second + " " + third);
+
+int total = first + second + third;
+
+Console.WriteLine("The elves are carrying: " + total);
