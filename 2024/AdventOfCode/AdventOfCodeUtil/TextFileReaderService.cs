@@ -19,7 +19,6 @@
             }
             catch (Exception e)
             {
-                // Handle exceptions, e.g., file not found, permission issues, etc.
                 Console.WriteLine("Error reading the file: " + e.Message);
             }
 
